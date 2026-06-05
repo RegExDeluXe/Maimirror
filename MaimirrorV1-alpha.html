@@ -135,14 +135,18 @@
         const rotateC = {"1":"5","2":"6","3":"7","4":"8","5":"1","6":"2","7":"3","8":"4"};
         const symWRTX = {"1":"4","2":"3","3":"2","4":"1","5":"8","6":"7","7":"6","8":"5"};
         const symWRTY = {"1":"8","2":"7","3":"6","4":"5","5":"4","6":"3","7":"2","8":"1"};
-        const symmetrySlide = {"<":">",">":"<"};
+        
+        const symmetrySlideLR = {"<":">",">":"<"};
+        const symmetrySlideRotation = {"p":"q","q":"p","s":"z","z":"s"}
+
         const symmetryXTouchCD = {"1":"5","2":"4","3":"3","4":"2","5":"1","6":"8","7":"7","8":"6"};
         const symmetryYTouchCD = {"1":"1","2":"8","3":"7","4":"6","5":"5","6":"4","7":"3","2":"8"};
 
         const regexN = /[1-8](?=[1-8]*\,|b|f|h|x|\/|V|v|p|q|s|z|w|\-|\<|\>|\^|\[|\@|\`|\?|\!|\$)/g;
         //                           notes         |       slide                | special notes
         //|b|f|h|x|\/|V|v|p|q|s|z|w|\-|\<|\>|\^|\
-        const regexSlide = /<|>/g;
+        const regexSlideLR = /\<|\>/g;
+        const regexSlideRotation = /p|q|s|z/g;
         const regexTouchCD  = /(?<=E|D)[1-8]/g;
 
         
@@ -159,16 +163,19 @@
             while ((textbefinden = regexN.exec(textIn) )!== null){
                 //console.log(textbefinden[0]);
                 //console.log(rotateC[textbefinden[0]]);
-                textOut = replaceCharDayo(textOut, textbefinden["index"], rotateC[textbefinden[0]]); 
+                textOut = replaceCharDayo(textOut, textbefinden["index"], rotateC[textbefinden[0]],textinlengthDesu); 
                 
                 //console.log(textbefinden);  
             }
 
 
-            //replace
-            while((textbefinden = regexSlide.exec(textIn)) !== null){
-                 textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlide[textbefinden[0]]);
+            //replace slideLR
+            while((textbefinden = regexSlideLR.exec(textIn)) !== null){
+                textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlideLR[textbefinden[0]],textinlengthDesu);
             }
+
+
+
 
             //console.log(textIn);
             document.getElementById("outputTxt").innerHTML = textOut;
@@ -195,10 +202,16 @@
                 //console.log(textbefinden);  
             }
             
-            //E and D touch adjustment
+            //E and D touch readjustment
             while((textbefinden = regexTouchCD.exec(textIn)) !== null){
                 console.log(textbefinden);  
-                 textOut = replaceCharDayo(textOut, textbefinden["index"], symmetryXTouchCD[textbefinden[0]]);
+                textOut = replaceCharDayo(textOut, textbefinden["index"], symmetryXTouchCD[textbefinden[0]]);
+            }
+
+            //rotation oriented slides adjustment
+            while((textbefinden = regexSlideRotation.exec(textIn)) !== null){
+                console.log(textbefinden);  
+                textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlideRotation[textbefinden[0]],textinlengthDesu);
             }
             
             //console.log(textIn);
@@ -228,13 +241,19 @@
 
 
             //slide symmetry
-            while((textbefinden = regexSlide.exec(textIn)) !== null){
-                 textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlide[textbefinden[0]]);
+            while((textbefinden = regexSlideLR.exec(textIn)) !== null){
+                 textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlideLR[textbefinden[0]]);
             }
 
             //E and D touch adjustment
             while((textbefinden = regexTouchCD.exec(textIn)) !== null){
                  textOut = replaceCharDayo(textOut, textbefinden["index"], symmetryYTouchCD[textbefinden[0]]);
+            }
+
+            //rotation oriented slides adjustment
+            while((textbefinden = regexSlideRotation.exec(textIn)) !== null){
+                console.log(textbefinden);  
+                textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlideRotation[textbefinden[0]],textinlengthDesu);
             }
             
 
