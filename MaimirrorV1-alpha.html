@@ -158,28 +158,32 @@
             
             //replace...
             let textbefinden, textOut = textIn;
+            console.log(1);
+            console.log(textOut);
             
             //replace numbers
             while ((textbefinden = regexN.exec(textIn) )!== null){
                 //console.log(textbefinden[0]);
                 //console.log(rotateC[textbefinden[0]]);
                 textOut = replaceCharDayo(textOut, textbefinden["index"], rotateC[textbefinden[0]],textinlengthDesu); 
-                
-                //console.log(textbefinden);  
+                console.log(textOut);
+                console.log(textbefinden);  
             }
 
 
             //replace slideLR
             while((textbefinden = regexSlideLR.exec(textIn)) !== null){
+
                 textOut = replaceCharDayo(textOut, textbefinden["index"], symmetrySlideLR[textbefinden[0]],textinlengthDesu);
+                console.log(textOut);
             }
 
 
 
 
             //console.log(textIn);
-            document.getElementById("outputTxt").innerHTML = textOut;
-            document.getElementById("outputBottom").innerHTML = "pi rotated with respect to centre";
+            document.getElementById("outputTxt").innerText = textOut;
+            document.getElementById("outputBottom").innerText = "pi rotated with respect to centre";
 
         }
 
@@ -215,8 +219,8 @@
             }
             
             //console.log(textIn);
-            document.getElementById("outputTxt").innerHTML = textOut;
-            document.getElementById("outputBottom").innerHTML = "symmetric with respect to the x-axis";
+            document.getElementById("outputTxt").innerText = textOut;
+            document.getElementById("outputBottom").innerText = "symmetric with respect to the x-axis";
 
         }
 
@@ -257,8 +261,8 @@
             }
             
 
-            document.getElementById("outputTxt").innerHTML = textOut;
-            document.getElementById("outputBottom").innerHTML = "symmetric with respect to the y-axis";
+            document.getElementById("outputTxt").innerText = textOut;
+            document.getElementById("outputBottom").innerText = "symmetric with respect to the y-axis";
         }
 
 
