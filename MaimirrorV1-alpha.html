@@ -9,6 +9,11 @@
     body{
         background-color: rgb(35, 35, 35);
     }
+
+    .card{
+        border-radius: 0.5rem;
+    }
+
     .input{
         width: 44%;
         height: 600px;
@@ -93,6 +98,7 @@
         position: absolute;
         bottom: -30px;
         font-size: 40px;
+        font-family: sans-serif;
         text-align: center;
     }
 
@@ -106,7 +112,7 @@
 </style>
 <body>
 
-    <div class="input">
+    <div class="input card">
         <div id="input_title">Input</div>
         <textarea name="in1" id="in1Id" class="in1c"></textarea>
 
@@ -119,7 +125,7 @@
     </div>
 
     
-    <div class="output">
+    <div class="output card">
         <div id="output_title">Output</div>
 
         <div Id="outputTxt"></div>
@@ -220,7 +226,7 @@
             
             //console.log(textIn);
             document.getElementById("outputTxt").innerText = textOut;
-            document.getElementById("outputBottom").innerText = "symmetric with respect to the x-axis";
+            document.getElementById("outputBottom").innerText = "symmetric with respect to x-axis";
 
         }
 
@@ -262,7 +268,7 @@
             
 
             document.getElementById("outputTxt").innerText = textOut;
-            document.getElementById("outputBottom").innerText = "symmetric with respect to the y-axis";
+            document.getElementById("outputBottom").innerText = "symmetric with respect to y-axis";
         }
 
 
